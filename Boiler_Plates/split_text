@@ -1,0 +1,18 @@
+def split_text(documents: list[Document]):
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1000, 
+        chunk_overlap=500,
+        length_function=len,
+        add_start_index=True,
+    )
+
+    chunks = text_splitter.split_documents(documents)
+    print(f"Split documents into {len(chunks)} chunks.")
+    
+    # Example: print 10th chunk if exists
+    if len(chunks) > 10:
+        document = chunks[10]
+        print("Example chunk content:", document.page_content[:200], "...")
+        print("Metadata:", document.metadata)
+    
+    return chunks
